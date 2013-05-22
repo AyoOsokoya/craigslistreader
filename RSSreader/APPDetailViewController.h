@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface APPDetailViewController : UIViewController
-
-@property (strong, nonatomic) id detailItem;
-
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic, copy) NSString *url;
+    
 @end
