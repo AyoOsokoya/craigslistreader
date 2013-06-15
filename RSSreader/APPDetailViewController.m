@@ -12,16 +12,22 @@
 @end
 
 @implementation APPDetailViewController
-@synthesize url = _url;
 
 #pragma mark - Managing the detail item
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSURL *myURL = [NSURL URLWithString: [self.url stringByAddingPercentEscapesUsingEncoding:
-                                          NSUTF8StringEncoding]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
-    [self.webView loadRequest:request];
-    NSLog(@"%@", self.url);
+    //NSURL *myURL = [NSURL URLWithString:[self.itemURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
+    //[self.webView loadRequest:request];
+    
+    //check if the item is a favorite
+    //if so set the button to active
+    
+    [self.webView loadHTMLString:self.pageHTML baseURL:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    
 }
 
 - (void)didReceiveMemoryWarning

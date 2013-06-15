@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Feeds.h"
+#import "feed.h"
 
-@interface APPMasterViewController : UITableViewController <NSXMLParserDelegate>
+@interface FeedsTableViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) Feeds *feeds;
 @end
