@@ -7,7 +7,7 @@
 //
 
 #import "FollowedFeedsTableViewController.h"
-#import "FollowedFeeds.h"
+#import "CategoryOfFeeds.h"
 
 @interface FollowedFeedsTableViewController ()
 @property NSInteger selectedRow;
@@ -15,10 +15,12 @@
 
 @implementation FollowedFeedsTableViewController
 - (NSMutableArray *) followedFeeds{
-    //these will be groups by category
-    //init with some temporary data
-    if(!_followedFeeds) {
-        //NSMutableArray * followedFeeds = [[NSMutableArray alloc] init];
+    //only init if the feeds have been grabbed
+    //this prevents asynchronous thread initing the followed feeds when self.feeds is not ready
+    //self.followedFeeds causes it to be set up only when ready else it is nil and will
+    //be init only when there is feed data
+    
+    if(!_followedFeeds && [_feeds count]) {
         _followedFeeds = [[NSMutableArray alloc] init];
         for (Feed *feed in self.feeds.allFeeds) {
             NSMutableDictionary *tempDictionary = [[NSMutableDictionary alloc] init];
@@ -33,13 +35,12 @@
     return _followedFeeds;
 }
 
-- (Feeds *) feeds{
-    if(!_feeds) _feeds = [[Feeds alloc] init];
+- (CategoryOfFeeds *) feeds{
+    if(!_feeds) _feeds = [[CategoryOfFeeds alloc] init];
     return _feeds;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style{
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -47,16 +48,52 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [self.navigationController setToolbarHidden:NO animated:NO];
+}
+
+#pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.feeds = [self.feeds initWithURLs:self.feeds.feedURLs];
+    
+    /*
+    CategoryOfFeeds *test0 = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
+    self.feeds = test0;
+    [self.tableView reloadData];
+     */
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^
+    {
+        CategoryOfFeeds *test0 = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
+        self.feeds = test0;
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [self.tableView reloadData];
+        });
+    });
+    
+    //self.feeds = [self.feeds initWithURLs:self.feeds.feedURLs];
+    //Todo init an array of cities
+    //this should all go in a new model class of user data
+    //followed feeds points to userdata which has Tokyo and the categories, which have the feeds
+    //we can expand userdata later on
+    //
+    //CategoryOfFeeds *test1 = [[CategoryOfFeeds alloc] initWithTitle:@"Services" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test2 = [[CategoryOfFeeds alloc] initWithTitle:@"Housing" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test3 = [[CategoryOfFeeds alloc] initWithTitle:@"For Sale" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test4 = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test5 = [[CategoryOfFeeds alloc] initWithTitle:@"Resumes" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test6 = [[CategoryOfFeeds alloc] initWithTitle:@"Part-Time" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test7 = [[CategoryOfFeeds alloc] initWithTitle:@"Gigs" forCity:@"Tokyo"];
+    //CategoryOfFeeds *test8 = [[CategoryOfFeeds alloc] initWithTitle:@"Events" forCity:@"Tokyo"];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //NSInteger sumFeedsCount = [test0.allFeeds count] +[test1.allFeeds count] +[test2.allFeeds count] +[test3.allFeeds count] +[test4.allFeeds count] +[test5.allFeeds count] +[test6.allFeeds count] +[test7.allFeeds count] +[test8.allFeeds count];
+    //NSLog(@"%ld Feeds", (long)sumFeedsCount);
 }
 
 - (IBAction)toggleEditMode:(UIBarButtonItem *)sender {
@@ -86,7 +123,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    
     return [self.followedFeeds count];
 }
 
@@ -167,7 +203,7 @@
             Feed* feed = self.feeds.allFeeds[indexPath.row];
             NSLog(@"%ld", (long)indexPath.row);
             controller.feeds.allFeeds = [[NSMutableArray alloc] initWithObjects:feed, nil];
-            controller.title = feed.title;
+            controller.title = [feed.title stringByReplacingOccurrencesOfString:@"craigslist | " withString:@""];
             //take this and
         }
     }

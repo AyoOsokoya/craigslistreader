@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic) BOOL isFollowed;
 
+@property NSUInteger order;//TODO the order in which feeds will be sorted in the table view
+
 - (Feed *) initWithURL: (NSString *)feedURL withTitle:(NSString *) title isFollowed:(BOOL)isFollowed;
 - (Feed *) initWithURL: (NSString *)feedURL isFollowed:(BOOL)isFollowed;
 - (void) refresh;

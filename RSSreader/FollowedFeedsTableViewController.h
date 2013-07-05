@@ -10,10 +10,14 @@
 #import "Feed.h"
 #import "Feeds.h"
 #import "FeedsTableViewController.h"
+#import "FollowedFeeds.h"
+#import "CategoryOfFeeds.h"
+//#import "
 
 @interface FollowedFeedsTableViewController : UITableViewController
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *followedFeeds;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-@property (nonatomic, strong) Feeds *feeds;
+@property (nonatomic, strong) CategoryOfFeeds *feeds;
+//@property (nonatomic, strong)
 @end

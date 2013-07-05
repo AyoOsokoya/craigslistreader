@@ -7,7 +7,6 @@
 //
 
 #import "Feeds.h"
-#import "FollowedFeeds.h"
 
 @implementation Feeds//a collection of Feed objects
 #pragma mark Accessors
@@ -24,7 +23,7 @@
     return _followedFeeds;
 }
 
-- (NSArray *) allFeeds{
+- (NSMutableArray *) allFeeds{
     if (!_allFeeds) _allFeeds = [[NSMutableArray alloc] init];
     return _allFeeds;
 }
@@ -36,7 +35,7 @@
     self.feedURLs = [feedURLs mutableCopy];
     
     for (NSString *feedURL in feedURLs) {
-        Feed *feed = [[Feed alloc] initWithURL:feedURL withTitle:@"" isFollowed:YES];
+        Feed *feed = [[Feed alloc] initWithURL:feedURL withTitle:@"" isFollowed:NO];
         //this needs some work
         [self.allFeeds addObject:feed];
     }

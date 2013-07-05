@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APPDetailViewController.h"
+#import "NSString+HTMLFunctions.h"
 #import "Feeds.h"
 #import "feed.h"
 

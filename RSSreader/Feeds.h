@@ -10,6 +10,7 @@
 #import "Feed.h"
 #import "FollowedFeeds.h"
 
+//A collection of Feeds
 @interface Feeds : NSObject
 @property (strong, nonatomic) NSMutableArray *allFeeds;//An Array of all feed objects
 @property (strong, nonatomic) NSMutableArray *feedURLs;

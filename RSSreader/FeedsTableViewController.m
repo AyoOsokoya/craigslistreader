@@ -7,8 +7,6 @@
 //
 
 #import "FeedsTableViewController.h"
-#import "APPDetailViewController.h"
-#import "NSString+HTMLFunctions.h"
 
 @interface FeedsTableViewController ()
 @end
@@ -20,8 +18,8 @@
     return _feeds;
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-    
+- (void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 - (void)awakeFromNib
@@ -120,15 +118,16 @@
 */
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    /*if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"ShowDetailSegue"]) {
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSMutableDictionary * currentItem = [[self.feeds.allFeeds[indexPath.section] items] objectAtIndex:indexPath.row];
         
         [segue.destinationViewController setItemURL:[currentItem objectForKey:@"link"]];
-        [segue.destinationViewController setPageHTML:[currentItem objectForKey:@"description"]];
+        //[segue.destinationViewController setPageHTML:[currentItem objectForKey:@"description"]];
         [segue.destinationViewController setTitle:[currentItem objectForKey:@"title"] ];
-    }*/
+    }
 }
 
 @end
+
