@@ -62,7 +62,9 @@
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-                       self.feeds = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
+                        //Todo ask the city to init the feed with the correct feed domain
+                        //could I store all of this as json or something then just load it up
+                        self.feeds = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" feedDomain:@"craigslist.jp" forCity:@"Tokyo"];
         
                        dispatch_async(dispatch_get_main_queue(), ^ {
                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

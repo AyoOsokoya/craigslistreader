@@ -23,6 +23,6 @@ What if I make Feed Category a subclass of Feeds as it can be considered
 @property (nonatomic, strong) NSString * title;
 
 //generates the rss feeds for a give city name
-- (CategoryOfFeeds *) initWithTitle:(NSString *)categoryTitle forCity:(NSString *)city;
+- (CategoryOfFeeds *) initWithTitle:(NSString *)categoryTitle feedDomain:(NSString *)domain forCity:(NSString *)city;
 
 @end

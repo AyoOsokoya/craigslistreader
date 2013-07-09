@@ -14,6 +14,7 @@
 //property gps location
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *allCategorys;
+@property (nonatomic, strong) NSString *craigslistDomain;
 
-- (CityWithCategorys *)initCity:(NSString *)city withCategories:(NSArray *)categories;
+- (CityWithCategorys *)initCity:(NSString *)city withCategories:(NSArray *)categories feedDomain:(NSString *)domain;
 @end

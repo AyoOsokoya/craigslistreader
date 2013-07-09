@@ -21,9 +21,18 @@
     if (!_temporaryFeedArray) _temporaryFeedArray = [[NSMutableArray alloc] init];
     return _temporaryFeedArray;
 }
+
+- (NSString *)domain{
+    if(!_domain) _domain = [[NSString alloc] init];
+    return _domain;
+}
+
 #pragma mark - Initializors
-- (CategoryWithFeedsTemplate *) initWithTitle:(NSString *)title forCity:(NSString *)city{
+- (CategoryWithFeedsTemplate *) initWithTitle:(NSString *)title feedDomain:(NSString *)domain forCity:(NSString *)city{
     _city = [city lowercaseString];
+    _domain = domain;
+    
+    
     if ([title isEqualToString:@"Community"])           [self communityTemplateArray];
     else if ([title isEqualToString:@"Personals"])  	[self personalsTemplateArray];
     else if ([title isEqualToString:@"Services"])       [self servicesTemplateArray];
@@ -42,171 +51,175 @@
     NSMutableDictionary * tempDictionary = [[NSMutableDictionary alloc] init];
     [tempDictionary setObject:title forKey:@"title"];//
     //todo change craigslist.jp to a token that can be replaces by the cities base url
-    [tempDictionary setObject:[feedURL stringByReplacingOccurrencesOfString:@"{#}" withString:self.city] forKey:@"feedURL"];
+    feedURL = [feedURL stringByReplacingOccurrencesOfString:@"{cityName}" withString:self.city];
+    feedURL = [feedURL stringByReplacingOccurrencesOfString:@"{domainName}" withString:self.domain];
+    
+    [tempDictionary setObject:feedURL forKey:@"feedURL"];
+    
     [self.temporaryFeedArray addObject:tempDictionary];
     self.feedTemplates = [self.temporaryFeedArray copy];
     return tempDictionary;
 }
 
 - (void) jobsTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/jjj/index.rss" title:@"All Jobs"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/acc/index.rss" title:@"Accounting & Finance"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ofc/index.rss" title:@"Admin & Office"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/egr/index.rss" title:@"Architecture & Engineering"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/med/index.rss" title:@"Art, Media & Design"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sci/index.rss" title:@"Biotech & Science"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bus/index.rss" title:@"Business & Management"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/csr/index.rss" title:@"Customer Service"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/edu/index.rss" title:@"Education"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/fbh/index.rss" title:@"Food, Drink & Hospitality"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/lab/index.rss" title:@"General Labor"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/gov/index.rss" title:@"Government"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hum/index.rss" title:@"Human Resources"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/eng/index.rss" title:@"Internet Engineers"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/lgl/index.rss" title:@"Legal & Paralegal"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/mnu/index.rss" title:@"Manufacturing"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/mar/index.rss" title:@"Marketing, PR & Advertising"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hea/index.rss" title:@"Medical & Health"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/npo/index.rss" title:@"Nonprofit Sector"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rej/index.rss" title:@"Real Estate"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ret/index.rss" title:@"Retail & Wholesale"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sls/index.rss" title:@"Sales & Biz Dev"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/spa/index.rss" title:@"Salon, Spas & Fitness"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sec/index.rss" title:@"Security"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/trd/index.rss" title:@"Skilled Trade & Craft"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sof/index.rss" title:@"Software, QA & DBA"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sad/index.rss" title:@"Systems & Network"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/tch/index.rss" title:@"Technical Support"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/trp/index.rss" title:@"Transport"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/tfr/index.rss" title:@"TV, Film & Video"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/web/index.rss" title:@"Web & Information Design"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/wri/index.rss" title:@"Writing & Editing"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/etc/index.rss" title:@"Etc"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/jjj/index.rss" title:@"All Jobs"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/acc/index.rss" title:@"Accounting & Finance"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ofc/index.rss" title:@"Admin & Office"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/egr/index.rss" title:@"Architecture & Engineering"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/med/index.rss" title:@"Art, Media & Design"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sci/index.rss" title:@"Biotech & Science"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bus/index.rss" title:@"Business & Management"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/csr/index.rss" title:@"Customer Service"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/edu/index.rss" title:@"Education"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/fbh/index.rss" title:@"Food, Drink & Hospitality"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/lab/index.rss" title:@"General Labor"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/gov/index.rss" title:@"Government"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hum/index.rss" title:@"Human Resources"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/eng/index.rss" title:@"Internet Engineers"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/lgl/index.rss" title:@"Legal & Paralegal"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/mnu/index.rss" title:@"Manufacturing"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/mar/index.rss" title:@"Marketing, PR & Advertising"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hea/index.rss" title:@"Medical & Health"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/npo/index.rss" title:@"Nonprofit Sector"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rej/index.rss" title:@"Real Estate"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ret/index.rss" title:@"Retail & Wholesale"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sls/index.rss" title:@"Sales & Biz Dev"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/spa/index.rss" title:@"Salon, Spas & Fitness"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sec/index.rss" title:@"Security"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/trd/index.rss" title:@"Skilled Trade & Craft"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sof/index.rss" title:@"Software, QA & DBA"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sad/index.rss" title:@"Systems & Network"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/tch/index.rss" title:@"Technical Support"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/trp/index.rss" title:@"Transport"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/tfr/index.rss" title:@"TV, Film & Video"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/web/index.rss" title:@"Web & Information Design"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/wri/index.rss" title:@"Writing & Editing"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/etc/index.rss" title:@"Etc"];
 }
 
 - (void) communityTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ccc/index.rss" title:@"All Community"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/act/index.rss" title:@"Activities"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ats/index.rss" title:@"Artists"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/kid/index.rss" title:@"Childcare"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cls/index.rss" title:@"Classes"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/eve/index.rss" title:@"Events"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/com/index.rss" title:@"General"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/grp/index.rss" title:@"Groups"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/vnn/index.rss" title:@"Local & News"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/laf/index.rss" title:@"Lost+Found"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/muc/index.rss" title:@"Musicians"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/pet/index.rss" title:@"Pets"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/pol/index.rss" title:@"Politics"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rid/index.rss" title:@"Rideshare"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/vol/index.rss" title:@"Volunteers"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ccc/index.rss" title:@"All Community"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/act/index.rss" title:@"Activities"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ats/index.rss" title:@"Artists"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/kid/index.rss" title:@"Childcare"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cls/index.rss" title:@"Classes"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/eve/index.rss" title:@"Events"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/com/index.rss" title:@"General"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/grp/index.rss" title:@"Groups"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/vnn/index.rss" title:@"Local & News"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/laf/index.rss" title:@"Lost+Found"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/muc/index.rss" title:@"Musicians"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/pet/index.rss" title:@"Pets"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/pol/index.rss" title:@"Politics"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rid/index.rss" title:@"Rideshare"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/vol/index.rss" title:@"Volunteers"];
 }
 
 - (void) personalsTemplateArray{
     //TODO Strictly Platonic has more subcategories
     //currently just show all
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/stp/index.rss" title:@"Strictly Platonic"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/w4w/index.rss" title:@"Women Seek Women"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/w4m/index.rss" title:@"Women Seeking Men"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/m4w/index.rss" title:@"Men Seeking Women"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/m4m/index.rss" title:@"Men Seeking Men"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/msr/index.rss" title:@"Misc Romance"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cas/index.rss" title:@"Casual Encounters"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/mis/index.rss" title:@"Missed Connections"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rnr/index.rss" title:@"Rants and Raves"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/stp/index.rss" title:@"Strictly Platonic"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/w4w/index.rss" title:@"Women Seek Women"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/w4m/index.rss" title:@"Women Seeking Men"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/m4w/index.rss" title:@"Men Seeking Women"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/m4m/index.rss" title:@"Men Seeking Men"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/msr/index.rss" title:@"Misc Romance"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cas/index.rss" title:@"Casual Encounters"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/mis/index.rss" title:@"Missed Connections"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rnr/index.rss" title:@"Rants and Raves"];
 }
 
 - (void) servicesTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bbb/index.rss" title:@"All Services"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bts/index.rss" title:@"Beauty"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cps/index.rss" title:@"Computer"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/crs/index.rss" title:@"Creative"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cys/index.rss" title:@"Cycle"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/evs/index.rss" title:@"Event"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/fns/index.rss" title:@"Financial"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/lgs/index.rss" title:@"Legal"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/lss/index.rss" title:@"Lessons"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/mas/index.rss" title:@"Marine"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/pas/index.rss" title:@"Pets"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/aos/index.rss" title:@"Automotive"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/fgs/index.rss" title:@"Farm & Garden"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hss/index.rss" title:@"Household"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/lbs/index.rss" title:@"Labor/move"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rts/index.rss" title:@"Real Estate"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sks/index.rss" title:@"Skilled Trade"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/biz/index.rss" title:@"Buisniess Ads"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ths/index.rss" title:@"Therapeutic"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/trv/index.rss" title:@"Travel/vac"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/wet/index.rss" title:@"Write/Ed/Tr8"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bbb/index.rss" title:@"All Services"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bts/index.rss" title:@"Beauty"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cps/index.rss" title:@"Computer"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/crs/index.rss" title:@"Creative"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cys/index.rss" title:@"Cycle"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/evs/index.rss" title:@"Event"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/fns/index.rss" title:@"Financial"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/lgs/index.rss" title:@"Legal"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/lss/index.rss" title:@"Lessons"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/mas/index.rss" title:@"Marine"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/pas/index.rss" title:@"Pets"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/aos/index.rss" title:@"Automotive"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/fgs/index.rss" title:@"Farm & Garden"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hss/index.rss" title:@"Household"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/lbs/index.rss" title:@"Labor/move"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rts/index.rss" title:@"Real Estate"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sks/index.rss" title:@"Skilled Trade"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/biz/index.rss" title:@"Buisniess Ads"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ths/index.rss" title:@"Therapeutic"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/trv/index.rss" title:@"Travel/vac"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/wet/index.rss" title:@"Write/Ed/Tr8"];
 }
 
 - (void) forSaleTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sss/index.rss" title:@"All For Sale"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ata/index.rss" title:@"Antiques"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/baa/index.rss" title:@"Baby & Kids"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bar/index.rss" title:@"Barter"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bia/index.rss" title:@"Bikes"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/boo/index.rss" title:@"Boats"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bka/index.rss" title:@"Books"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/bfa/index.rss" title:@"Business"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sya/index.rss" title:@"Computer"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/zip/index.rss" title:@"Free"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/foa/index.rss" title:@"General"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hsa/index.rss" title:@"Household"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/jwa/index.rss" title:@"Jewelry"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/maa/index.rss" title:@"Materials"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rva/index.rss" title:@"Rvs"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sga/index.rss" title:@"Sporting"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/tia/index.rss" title:@"Tickets"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/tla/index.rss" title:@"Tools"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/wan/index.rss" title:@"Wanted"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ppa/index.rss" title:@"Appliances"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ara/index.rss" title:@"Arts & Crafts"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/pta/index.rss" title:@"Auto Parts"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/haa/index.rss" title:@"Beauty & Hlth"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cta/index.rss" title:@"Cars & Trucks"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ema/index.rss" title:@"CDs/DVD/VHS"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/moa/index.rss" title:@"Cell Phones"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cla/index.rss" title:@"Clothes & Accessories"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/cba/index.rss" title:@"Collectibles"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ela/index.rss" title:@"Electronics"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/gra/index.rss" title:@"Farm & Garden"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/fua/index.rss" title:@"Furniture"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/gms/index.rss" title:@"Garage Sale"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/mca/index.rss" title:@"Motorcycles"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/msa/index.rss" title:@"Musical Instruments"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/pha/index.rss" title:@"Photo & Video"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/taa/index.rss" title:@"Toys & Games"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/vga/index.rss" title:@"Video Gaming"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sss/index.rss" title:@"All For Sale"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ata/index.rss" title:@"Antiques"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/baa/index.rss" title:@"Baby & Kids"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bar/index.rss" title:@"Barter"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bia/index.rss" title:@"Bikes"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/boo/index.rss" title:@"Boats"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bka/index.rss" title:@"Books"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/bfa/index.rss" title:@"Business"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sya/index.rss" title:@"Computer"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/zip/index.rss" title:@"Free"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/foa/index.rss" title:@"General"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hsa/index.rss" title:@"Household"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/jwa/index.rss" title:@"Jewelry"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/maa/index.rss" title:@"Materials"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rva/index.rss" title:@"Rvs"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sga/index.rss" title:@"Sporting"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/tia/index.rss" title:@"Tickets"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/tla/index.rss" title:@"Tools"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/wan/index.rss" title:@"Wanted"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ppa/index.rss" title:@"Appliances"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ara/index.rss" title:@"Arts & Crafts"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/pta/index.rss" title:@"Auto Parts"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/haa/index.rss" title:@"Beauty & Hlth"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cta/index.rss" title:@"Cars & Trucks"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ema/index.rss" title:@"CDs/DVD/VHS"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/moa/index.rss" title:@"Cell Phones"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cla/index.rss" title:@"Clothes & Accessories"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/cba/index.rss" title:@"Collectibles"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ela/index.rss" title:@"Electronics"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/gra/index.rss" title:@"Farm & Garden"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/fua/index.rss" title:@"Furniture"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/gms/index.rss" title:@"Garage Sale"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/mca/index.rss" title:@"Motorcycles"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/msa/index.rss" title:@"Musical Instruments"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/pha/index.rss" title:@"Photo & Video"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/taa/index.rss" title:@"Toys & Games"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/vga/index.rss" title:@"Video Gaming"];
 }
 
 - (void) housingTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hhh/index.rss" title:@"All Housing"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/apa/index.rss" title:@"Housing, Apartments"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/swp/index.rss" title:@"Housing Swap"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/hsw/index.rss" title:@"Housing Wanted"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/off/index.rss" title:@"Office, Commercial"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/prk/index.rss" title:@"Parking, Storage"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/rea/index.rss" title:@"Real Estate For Sale"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/roo/index.rss" title:@"Rooms, Shared"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/sub/index.rss" title:@"Sublets, Temporary"];
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/vac/index.rss" title:@"Vacation Rentals"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hhh/index.rss" title:@"All Housing"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/apa/index.rss" title:@"Housing, Apartments"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/swp/index.rss" title:@"Housing Swap"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/hsw/index.rss" title:@"Housing Wanted"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/off/index.rss" title:@"Office, Commercial"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/prk/index.rss" title:@"Parking, Storage"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/rea/index.rss" title:@"Real Estate For Sale"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/roo/index.rss" title:@"Rooms, Shared"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/sub/index.rss" title:@"Sublets, Temporary"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/vac/index.rss" title:@"Vacation Rentals"];
 }
 
 - (void) eventsTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/eve/index.rss" title:@"Events"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/eve/index.rss" title:@"Events"];
 }
 
 - (void) resumesTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslit.jp/res/index.rss" title:@"Resumes"];
+    [self feedTemplateWithURL:@"http://{cityName}.craigslit.jp/res/index.rss" title:@"Resumes"];
 }
 
 - (void) parttimeTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/search/jjj?addFour=part-time/index.rss" title:@"Part Time"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/search/jjj?addFour=part-time/index.rss" title:@"Part Time"];
 }
 
 - (void) gigsTemplateArray{
-    [self feedTemplateWithURL:@"http://{#}.craigslist.jp/ggg/index.rss" title:@"Gigs"];
+    [self feedTemplateWithURL:@"http://{cityName}.{domainName}/ggg/index.rss" title:@"Gigs"];
 }
 
 #pragma mark - Accessors
