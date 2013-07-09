@@ -73,6 +73,9 @@
     
     return cell;
 }
+- (IBAction)donePressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 // Override to support conditional editing of the table view.

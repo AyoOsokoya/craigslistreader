@@ -51,26 +51,37 @@
 - (void) viewWillAppear:(BOOL)animated{
     [self.navigationController setToolbarHidden:NO animated:NO];
 }
+- (IBAction)refreshButtonPressed:(UIBarButtonItem *)sender {
+    [self refreshFeeds];
+}
 
+- (void)refreshFeeds {
+    self.feeds = nil;
+    self.followedFeeds = nil;
+    [self.tableView reloadData];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                       [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                       self.feeds = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
+        
+                       dispatch_async(dispatch_get_main_queue(), ^ {
+                           [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                           [self.tableView reloadData];
+                       });
+                   });
+}
 #pragma mark - UIViewController Methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self refreshFeeds];
     /*
     CategoryOfFeeds *test0 = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
     self.feeds = test0;
     [self.tableView reloadData];
      */
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^
-    {
-        CategoryOfFeeds *test0 = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" forCity:@"Tokyo"];
-        self.feeds = test0;
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [self.tableView reloadData];
-        });
-    });
+
     
     //self.feeds = [self.feeds initWithURLs:self.feeds.feedURLs];
     //Todo init an array of cities

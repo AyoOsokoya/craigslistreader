@@ -67,6 +67,9 @@
     
     return cell;
 }
+- (IBAction)donePressed:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -107,7 +110,7 @@
 }
 */
 
-#pragma mark - Table view delegate
+#pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

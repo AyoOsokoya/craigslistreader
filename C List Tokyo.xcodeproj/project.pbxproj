@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6B1A18731755FFEF006BC0D8 /* Feeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A18721755FFEF006BC0D8 /* Feeds.m */; };
 		6B1A1925175A4E6D006BC0D8 /* NSString+HTMLFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A1924175A4E6D006BC0D8 /* NSString+HTMLFunctions.m */; };
-		6B367244175345A400CA344D /* iphoneIcon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B367243175345A400CA344D /* iphoneIcon114x114.png */; };
 		6B411700176B01550001AD09 /* FollowedFeedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4116FF176B01550001AD09 /* FollowedFeedsTableViewController.m */; };
 		6B824C6F174E1B2D00CA435D /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B824C6E174E1B2D00CA435D /* Feed.m */; };
 		6B9F4EE01769D27B007DABD9 /* CategoriesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9F4EDF1769D27B007DABD9 /* CategoriesListTableViewController.m */; };
@@ -32,6 +31,7 @@
 		6BC01707174AE097005071F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC016DF174AE096005071F1 /* Foundation.framework */; };
 		6BC0170F174AE097005071F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0170D174AE097005071F1 /* InfoPlist.strings */; };
 		6BC01712174AE097005071F1 /* RSSreaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC01711174AE097005071F1 /* RSSreaderTests.m */; };
+		6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1419D1789B80A005D6707 /* UserSavedData.m */; };
 		6BC354C01784483A00780036 /* purpleCicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC354BF1784483A00780036 /* purpleCicon.png */; };
 		6BC354C217844BDC00780036 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC354C117844BDC00780036 /* MessageUI.framework */; };
 		6BC354CA1786ECFE00780036 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC354C51786ECFE00780036 /* TFHpple.m */; };
@@ -53,8 +53,6 @@
 		6BD98CE41775AE3500EB61E8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD98CE31775AE3500EB61E8 /* FMDatabasePool.m */; };
 		6BD98CE61775B2A400EB61E8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD98CE51775B2A400EB61E8 /* libsqlite3.dylib */; };
 		6BE40A86176C09090020BBAD /* FollowedFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE40A85176C09090020BBAD /* FollowedFeeds.m */; };
-		6BF0D0EA175B71B6008801FD /* cover_201306-101x150.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BF0D0E9175B71B6008801FD /* cover_201306-101x150.jpg */; };
-		6BF0D0EC175B71E4008801FD /* cover_201305-101x150.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BF0D0EB175B71E4008801FD /* cover_201305-101x150.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +70,6 @@
 		6B1A18721755FFEF006BC0D8 /* Feeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feeds.m; sourceTree = "<group>"; };
 		6B1A1923175A4E6D006BC0D8 /* NSString+HTMLFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTMLFunctions.h"; sourceTree = "<group>"; };
 		6B1A1924175A4E6D006BC0D8 /* NSString+HTMLFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTMLFunctions.m"; sourceTree = "<group>"; };
-		6B367243175345A400CA344D /* iphoneIcon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iphoneIcon114x114.png; path = ../iphoneIcon114x114.png; sourceTree = "<group>"; };
 		6B4116FE176B01550001AD09 /* FollowedFeedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowedFeedsTableViewController.h; sourceTree = "<group>"; };
 		6B4116FF176B01550001AD09 /* FollowedFeedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowedFeedsTableViewController.m; sourceTree = "<group>"; };
 		6B824C6D174E1B2D00CA435D /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
@@ -107,6 +104,8 @@
 		6BC0170E174AE097005071F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6BC01710174AE097005071F1 /* RSSreaderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSreaderTests.h; sourceTree = "<group>"; };
 		6BC01711174AE097005071F1 /* RSSreaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSreaderTests.m; sourceTree = "<group>"; };
+		6BC1419C1789B80A005D6707 /* UserSavedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSavedData.h; sourceTree = "<group>"; };
+		6BC1419D1789B80A005D6707 /* UserSavedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSavedData.m; sourceTree = "<group>"; };
 		6BC354BF1784483A00780036 /* purpleCicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = purpleCicon.png; path = ../purpleCicon.png; sourceTree = "<group>"; };
 		6BC354C117844BDC00780036 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6BC354C41786ECFE00780036 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
@@ -138,8 +137,6 @@
 		6BD98CE51775B2A400EB61E8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6BE40A84176C09090020BBAD /* FollowedFeeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowedFeeds.h; sourceTree = "<group>"; };
 		6BE40A85176C09090020BBAD /* FollowedFeeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowedFeeds.m; sourceTree = "<group>"; };
-		6BF0D0E9175B71B6008801FD /* cover_201306-101x150.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cover_201306-101x150.jpg"; sourceTree = "<group>"; };
-		6BF0D0EB175B71E4008801FD /* cover_201305-101x150.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cover_201305-101x150.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,8 +168,7 @@
 		6B1A1929175B5D57006BC0D8 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				6BF0D0EB175B71E4008801FD /* cover_201305-101x150.jpg */,
-				6BF0D0E9175B71B6008801FD /* cover_201306-101x150.jpg */,
+				6BC354BF1784483A00780036 /* purpleCicon.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -283,11 +279,9 @@
 		6BC016E4174AE096005071F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6BC354BF1784483A00780036 /* purpleCicon.png */,
 				6B1A1929175B5D57006BC0D8 /* images */,
 				6B1A1923175A4E6D006BC0D8 /* NSString+HTMLFunctions.h */,
 				6B1A1924175A4E6D006BC0D8 /* NSString+HTMLFunctions.m */,
-				6B367243175345A400CA344D /* iphoneIcon114x114.png */,
 				6BC016EC174AE096005071F1 /* APPAppDelegate.h */,
 				6BC016ED174AE096005071F1 /* APPAppDelegate.m */,
 				6BC016E5174AE096005071F1 /* C List Tokyo-Info.plist */,
@@ -340,6 +334,8 @@
 			children = (
 				6BE40A84176C09090020BBAD /* FollowedFeeds.h */,
 				6BE40A85176C09090020BBAD /* FollowedFeeds.m */,
+				6BC1419C1789B80A005D6707 /* UserSavedData.h */,
+				6BC1419D1789B80A005D6707 /* UserSavedData.m */,
 			);
 			name = "User Data";
 			sourceTree = "<group>";
@@ -483,9 +479,6 @@
 				6BC016F2174AE096005071F1 /* Default@2x.png in Resources */,
 				6BC016F4174AE096005071F1 /* Default-568h@2x.png in Resources */,
 				6BC016F7174AE096005071F1 /* MainStoryboard.storyboard in Resources */,
-				6B367244175345A400CA344D /* iphoneIcon114x114.png in Resources */,
-				6BF0D0EA175B71B6008801FD /* cover_201306-101x150.jpg in Resources */,
-				6BF0D0EC175B71E4008801FD /* cover_201305-101x150.jpg in Resources */,
 				6BC354C01784483A00780036 /* purpleCicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,6 +535,7 @@
 				6BD98CDF1775ADDE00EB61E8 /* FMResultSet.m in Sources */,
 				6BC354E31787368F00780036 /* GTMNSString+HTML.m in Sources */,
 				6BC354E51787368F00780036 /* NSString+HTML.m in Sources */,
+				6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
