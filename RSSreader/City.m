@@ -9,6 +9,7 @@
 #import "City.h"
 
 @implementation City
+
 - (NSString *)title{
     if (!_title) _title = [NSString new];
     return _title;
@@ -22,4 +23,5 @@
 - (City *)initWithTitle:(NSString *)title URLTitle:(NSString *)URLTitle{
     return self;
 }
+
 @end

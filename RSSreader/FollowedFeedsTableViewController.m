@@ -65,6 +65,7 @@
                         //Todo ask the city to init the feed with the correct feed domain
                         //could I store all of this as json or something then just load it up
                         self.feeds = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" feedDomain:@"craigslist.jp" forCity:@"Tokyo"];
+                        //[self.feeds [[CategoryOfFeeds alloc] initWithTitle:@"Housing" feedDomain:@"craigslist.jp" forCity:@"Tokyo"];
         
                        dispatch_async(dispatch_get_main_queue(), ^ {
                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -147,8 +148,6 @@
     NSMutableDictionary *feedInfo = self.followedFeeds[indexPath.row];
     cell.textLabel.text = [feedInfo objectForKey:@"title"];
     cell.detailTextLabel.text = [feedInfo objectForKey:@"subtitle"];
-    
-    // Configure the cell...
     
     return cell;
 }

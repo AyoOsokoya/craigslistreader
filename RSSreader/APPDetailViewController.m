@@ -16,10 +16,23 @@
 #pragma mark - Managing the detail item
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSURL *pageURL = [NSURL URLWithString:[self.itemURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+    NSString *pageURLEscaptedUTF8 = [self.itemURL stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSString *pageProblemURLString = [@"http://tokyo.craigslist.jp/tch/3926678905.html" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *pageFineURLString    = [@"http://tokyo.craigslist.jp/fbh/3882721752.html" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSURL *pageProblemURL = [NSURL URLWithString:pageProblemURLString];
+    NSURL *pageFineURL  = [NSURL URLWithString:pageFineURLString];
+    
+    NSURL *pageURL = [NSURL URLWithString:pageURLEscaptedUTF8];
+    
     NSURLRequest *pageRequest = [NSURLRequest requestWithURL:pageURL];
     [pageRequest allowsCellularAccess];
-    NSString *pageHTML = [NSString stringWithContentsOfURL:pageURL encoding:NSUTF8StringEncoding error:NULL];
+    
+    //TODO solve the problem with some URLs not loading
+    NSError *pageLoadError = [[NSError alloc] initWithDomain:pageProblemURLString code:nil userInfo:nil];
+    NSString *pageHTML = [NSString stringWithContentsOfURL:pageURL encoding:NSUTF8StringEncoding error:&pageLoadError];
     //[self.webView loadRequest:pageRequest];
     //HTML Parsing
     //http://www.cocoawithlove.com/2008/10/using-libxml2-for-parsing-and-xpath.html

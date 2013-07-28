@@ -32,6 +32,7 @@
 		6BC0170F174AE097005071F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0170D174AE097005071F1 /* InfoPlist.strings */; };
 		6BC01712174AE097005071F1 /* RSSreaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC01711174AE097005071F1 /* RSSreaderTests.m */; };
 		6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1419D1789B80A005D6707 /* UserSavedData.m */; };
+		6BC141FE17A26F8F005D6707 /* ColorStripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC141FD17A26F8D005D6707 /* ColorStripTableViewCell.m */; };
 		6BC354C01784483A00780036 /* purpleCicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC354BF1784483A00780036 /* purpleCicon.png */; };
 		6BC354C217844BDC00780036 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC354C117844BDC00780036 /* MessageUI.framework */; };
 		6BC354CA1786ECFE00780036 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC354C51786ECFE00780036 /* TFHpple.m */; };
@@ -106,6 +107,8 @@
 		6BC01711174AE097005071F1 /* RSSreaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSreaderTests.m; sourceTree = "<group>"; };
 		6BC1419C1789B80A005D6707 /* UserSavedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSavedData.h; sourceTree = "<group>"; };
 		6BC1419D1789B80A005D6707 /* UserSavedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSavedData.m; sourceTree = "<group>"; };
+		6BC141FC17A26F8C005D6707 /* ColorStripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorStripTableViewCell.h; sourceTree = "<group>"; };
+		6BC141FD17A26F8D005D6707 /* ColorStripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorStripTableViewCell.m; sourceTree = "<group>"; };
 		6BC354BF1784483A00780036 /* purpleCicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = purpleCicon.png; path = ../purpleCicon.png; sourceTree = "<group>"; };
 		6BC354C117844BDC00780036 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6BC354C41786ECFE00780036 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
@@ -210,13 +213,13 @@
 			name = "Edit Category List";
 			sourceTree = "<group>";
 		};
-		6B2ADA75176B5CA400CA9AE7 /* Feed */ = {
+		6B2ADA75176B5CA400CA9AE7 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
 				6BC016F8174AE096005071F1 /* FeedsTableViewController.h */,
 				6BC016F9174AE096005071F1 /* FeedsTableViewController.m */,
 			);
-			name = Feed;
+			name = Feeds;
 			sourceTree = "<group>";
 		};
 		6B2ADA76176B5CAD00CA9AE7 /* Detail View */ = {
@@ -265,13 +268,15 @@
 			children = (
 				6BC016F5174AE096005071F1 /* MainStoryboard.storyboard */,
 				6B2ADA72176B5C8500CA9AE7 /* Followed Feeds */,
-				6B2ADA75176B5CA400CA9AE7 /* Feed */,
+				6B2ADA75176B5CA400CA9AE7 /* Feeds */,
 				6B2ADA76176B5CAD00CA9AE7 /* Detail View */,
 				6B2ADA73176B5C9300CA9AE7 /* Edit Feed List */,
 				6B2ADA74176B5C9A00CA9AE7 /* Edit Category List */,
 				6B1A192E175B5DC9006BC0D8 /* Model */,
 				6BC016E4174AE096005071F1 /* Supporting Files */,
 				6BC354E81787430D00780036 /* Supporting Libraries */,
+				6BC141FC17A26F8C005D6707 /* ColorStripTableViewCell.h */,
+				6BC141FD17A26F8D005D6707 /* ColorStripTableViewCell.m */,
 			);
 			path = RSSreader;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 				6BC354E31787368F00780036 /* GTMNSString+HTML.m in Sources */,
 				6BC354E51787368F00780036 /* NSString+HTML.m in Sources */,
 				6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */,
+				6BC141FE17A26F8F005D6707 /* ColorStripTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

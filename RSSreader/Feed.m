@@ -151,6 +151,7 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
+        [self.temporaryItem setObject:self.title forKey:@"feedTitle"];
         [self.temporaryItem setObject:self.temporaryPostTitle forKey:@"title"];
         [self.temporaryItem setObject:self.temporaryLink forKey:@"link"];
         [self.temporaryItem setObject:self.temporaryDescription forKey:@"description"];

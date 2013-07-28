@@ -236,11 +236,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedCell" textLabel="JWG-Qa-mQK" detailTextLabel="xxw-as-JJa" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="dFk-nD-HGd" userLabel="FeedCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="70"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FeedCell" textLabel="JWG-Qa-mQK" detailTextLabel="xxw-as-JJa" rowHeight="110" style="IBUITableViewCellStyleSubtitle" id="dFk-nD-HGd" userLabel="FeedCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Feed Item Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="127" translatesAutoresizingMaskIntoConstraints="NO" id="JWG-Qa-mQK">
@@ -258,6 +258,75 @@
                                 </view>
                                 <connections>
                                     <segue destination="VkG-nS-TIW" kind="push" identifier="ShowDetailSegue" id="hwS-lI-IRt"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellTypeColorIndicator" rowHeight="110" id="meS-NT-g9o" userLabel="FeedCell" customClass="ColorStripTableViewCell">
+                                <rect key="frame" x="0.0" y="132" width="320" height="110"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOx-JQ-X5Z">
+                                            <color key="backgroundColor" red="0.63719415957676551" green="0.0" blue="0.84693877551020402" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Seeking Talented Desinger and Programmer for Well Paid Amazing Position" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Zjn-Wn-LqW">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="52" id="I5J-Ee-FMp"/>
+                                                <constraint firstAttribute="width" constant="280" id="ogq-gF-bfp"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" red="0.23471380739795922" green="0.23471380739795922" blue="0.23471380739795922" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Lorem Ipsum Dolor Sit Amet, Consequitor Nolorum Sedius" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="263" translatesAutoresizingMaskIntoConstraints="NO" id="sTU-34-mYc">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="d1C-0U-Nkp"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.51146399460000003" green="0.51146399460000003" blue="0.51146399460000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tokyo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbs-y2-qnr">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="Qwd-Ta-CJL"/>
+                                                <constraint firstAttribute="width" constant="87" id="Wjn-B2-GTj"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLs-iE-hDf">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="48" id="dz8-V6-FnK"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qOx-JQ-X5Z" secondAttribute="bottom" constant="1" id="0xV-ag-3iO"/>
+                                    <constraint firstItem="qbs-y2-qnr" firstAttribute="top" secondItem="LLs-iE-hDf" secondAttribute="top" type="default" id="5F7-5w-dsV"/>
+                                    <constraint firstItem="sTU-34-mYc" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="20" type="default" id="6cy-lg-rvJ"/>
+                                    <constraint firstItem="LLs-iE-hDf" firstAttribute="trailing" secondItem="Zjn-Wn-LqW" secondAttribute="trailing" type="default" id="EsU-eh-OeU"/>
+                                    <constraint firstItem="qOx-JQ-X5Z" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" type="default" id="GII-vE-sHl"/>
+                                    <constraint firstAttribute="bottom" secondItem="qbs-y2-qnr" secondAttribute="bottom" constant="6" id="IDV-cE-qDx"/>
+                                    <constraint firstItem="sTU-34-mYc" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" constant="46" id="Idg-2Z-CAR"/>
+                                    <constraint firstItem="qbs-y2-qnr" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="20" type="default" id="Mwz-ug-aFK"/>
+                                    <constraint firstItem="LLs-iE-hDf" firstAttribute="baseline" secondItem="qbs-y2-qnr" secondAttribute="baseline" type="default" id="epm-tT-cSq"/>
+                                    <constraint firstItem="Zjn-Wn-LqW" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" constant="-3" id="lu5-6h-f4o"/>
+                                    <constraint firstItem="Zjn-Wn-LqW" firstAttribute="leading" secondItem="qOx-JQ-X5Z" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ofc-AR-OJI"/>
+                                    <constraint firstItem="Zjn-Wn-LqW" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="17" id="p3d-R6-MSb"/>
+                                    <constraint firstItem="qOx-JQ-X5Z" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" type="default" id="tfC-4P-0TO"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="cellTypeColorIndicator" destination="qOx-JQ-X5Z" id="0Hz-6j-uqG"/>
+                                    <outlet property="feedItemTitle" destination="Zjn-Wn-LqW" id="x2M-WN-acu"/>
+                                    <outlet property="itemSummary" destination="sTU-34-mYc" id="9Uo-Yd-TMH"/>
+                                    <segue destination="VkG-nS-TIW" kind="push" identifier="showDetailSegue" id="QAd-gG-ob1"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -380,9 +449,59 @@
             <point key="canvasLocation" x="754" y="69"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="APPDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/APPDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="exportButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="replyButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="CategoriesListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CategoriesListTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ColorStripTableViewCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ColorStripTableViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="cellTypeColorIndicator" candidateClass="UIView"/>
+                <relationship kind="outlet" name="feedItemTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="itemSummary" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="FeedListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedListTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="FeedsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FeedsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="FollowedFeedsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FollowedFeedsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="editButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="QAd-gG-ob1"/>
+    </inferredMetricsTieBreakers>
 </document>

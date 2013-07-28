@@ -53,6 +53,9 @@
 }
 
 #pragma mark - Table View
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 110;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -84,14 +87,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
+    //static NSString *cellIdentifier = @"FeedCell";
+    static NSString *cellIdentifier = @"CellTypeColorIndicator";
+    ColorStripTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     Feed *feed = self.feeds.allFeeds[indexPath.section];
+    NSDictionary *currentItem = feed.items[indexPath.row];
     
-    NSString *itemTitle = [feed.items[indexPath.row] objectForKey: @"title"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", itemTitle];
+    NSString *itemTitle = [currentItem objectForKey: @"title"];
+    cell.feedItemTitle.text = [NSString stringWithFormat:@"%@", itemTitle];
     
-    cell.detailTextLabel.text = [[feed.items[indexPath.row] objectForKey:@"description"] stringByReplacingOccurrencesOfString:@" 00:00:00 +0000" withString:@""];
+    NSString *description = [[currentItem objectForKey:@"description"] stringByReplacingOccurrencesOfString:@" 00:00:00 +0000" withString:@""];
+    cell.itemSummary.text = [NSString stringWithFormat:@"%@", description];
+    [cell setCellTypeColorIndicatorByCategoryName:[currentItem objectForKey:@"feedTitle"]];
     
     return cell;
 }

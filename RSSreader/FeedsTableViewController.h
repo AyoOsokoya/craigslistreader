@@ -11,6 +11,7 @@
 #import "NSString+HTMLFunctions.h"
 #import "Feeds.h"
 #import "feed.h"
+#import "ColorStripTableViewCell.h"
 
 @interface FeedsTableViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

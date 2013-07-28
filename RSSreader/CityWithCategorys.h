@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *allCategorys;
 @property (nonatomic, strong) NSString *craigslistDomain;
+@property (nonatomic, strong) NSArray *subCitys; //Todo An Array of SubCities. NY is an example
 
 - (CityWithCategorys *)initCity:(NSString *)city withCategories:(NSArray *)categories feedDomain:(NSString *)domain;
 @end
