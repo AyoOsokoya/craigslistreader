@@ -8,15 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Feed.h"
-#import "FollowedFeeds.h"
 
 //A collection of Feeds
 @interface Feeds : NSObject
-@property (strong, nonatomic) NSMutableArray *allFeeds;//An Array of all feed objects
-@property (strong, nonatomic) NSMutableArray *feedURLs;
-@property (strong, nonatomic) FollowedFeeds *followedFeeds;
-@property (strong, nonatomic) NSMutableArray *followedFeedsURLs;
+@property (strong, nonatomic) NSMutableArray *feeds;//An Array of all feed objects
 
+//Todo we need a new initializer with the city name, location, etc.
 - (Feeds *) initWithURLs:(NSMutableArray *)feedURLs;//designated initializer
 - (Feeds *) init;
 

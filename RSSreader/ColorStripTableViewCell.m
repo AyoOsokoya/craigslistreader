@@ -10,8 +10,7 @@
 
 @implementation ColorStripTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -19,8 +18,7 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated{
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
@@ -33,7 +31,6 @@
 }
 
 - (void)setCellTypeColorIndicatorByCategoryName:(NSString *)categoryName{
-    
     self.cellTypeColorIndicator.backgroundColor = [ColorStripTableViewCell colorForCategory:categoryName];
 }
 
@@ -59,7 +56,8 @@
     } else if([categoryName isEqualToString:@"Events"]){
         color = [UIColor colorWithHue:0.9 saturation:0.5 brightness:1 alpha:1];
     } else {
-        color = [UIColor colorWithHue:1 saturation:1 brightness:1 alpha:1];
+        color = [UIColor colorWithHue:1 saturation:1 brightness:0 alpha:0.5];
+        
     }
     
     return color;

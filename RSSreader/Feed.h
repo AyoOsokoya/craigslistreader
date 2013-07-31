@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSMutableString *title;
 @property (nonatomic, strong) NSMutableString *link;
 @property (nonatomic, strong) NSMutableString *description;
+@property (nonatomic, strong) NSMutableString *categoryTitle;
 //optional
 @property (nonatomic, strong) NSURL *image;
 @property (nonatomic, strong) NSString *lastBuildDate;
@@ -22,9 +23,9 @@
 @property (nonatomic) BOOL isFollowed;
 
 @property NSUInteger order;//TODO the order in which feeds will be sorted in the table view
-
-- (Feed *) initWithURL: (NSString *)feedURL withTitle:(NSString *) title isFollowed:(BOOL)isFollowed;
-- (Feed *) initWithURL: (NSString *)feedURL isFollowed:(BOOL)isFollowed;
+- (Feed *)initWithURL:(NSString *)feedURL withTitle:(NSString *)title categoryTitle:(NSString *)categoryTitle isFollowed:(BOOL)isFollowed;
+- (Feed *)initWithURL:(NSString *)feedURL withTitle:(NSString *) title isFollowed:(BOOL)isFollowed;
+- (Feed *)initWithURL:(NSString *)feedURL isFollowed:(BOOL)isFollowed;
 - (void) refresh;
 
 @end

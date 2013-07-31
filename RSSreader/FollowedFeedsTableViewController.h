@@ -10,9 +10,7 @@
 #import "Feed.h"
 #import "Feeds.h"
 #import "FeedsTableViewController.h"
-#import "FollowedFeeds.h"
 #import "CategoryOfFeeds.h"
-//#import "
 
 @interface FollowedFeedsTableViewController : UITableViewController
 @property (nonatomic, strong) IBOutlet UITableView *tableView;

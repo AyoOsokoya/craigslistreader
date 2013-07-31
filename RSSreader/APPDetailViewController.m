@@ -78,7 +78,6 @@
     [controller setMessageBody:self.itemURL isHTML:NO];
     //TODO... should i implement the completion handler?
     if (controller) [self presentViewController:controller animated:YES completion: NULL];
-    NSLog(@"Replying to Item");
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {

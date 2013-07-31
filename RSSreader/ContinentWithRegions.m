@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 inspireology. All rights reserved.
 //
 
-#import "CountryWithRegions.h"
+#import "ContinentWithRegions.h"
 
-@implementation CountryWithRegions
+@implementation ContinentWithRegions
 //a collection of regions
 //
 //Continents

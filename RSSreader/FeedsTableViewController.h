@@ -12,8 +12,12 @@
 #import "Feeds.h"
 #import "feed.h"
 #import "ColorStripTableViewCell.h"
+#import "UserFollowedFeeds.h"
 
 @interface FeedsTableViewController : UITableViewController
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) Feeds *feeds;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsButton;
+@property (strong, nonatomic) UserFollowedFeeds *userData;
 @end

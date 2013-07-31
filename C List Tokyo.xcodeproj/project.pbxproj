@@ -10,6 +10,7 @@
 		6B1A18731755FFEF006BC0D8 /* Feeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A18721755FFEF006BC0D8 /* Feeds.m */; };
 		6B1A1925175A4E6D006BC0D8 /* NSString+HTMLFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1A1924175A4E6D006BC0D8 /* NSString+HTMLFunctions.m */; };
 		6B411700176B01550001AD09 /* FollowedFeedsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B4116FF176B01550001AD09 /* FollowedFeedsTableViewController.m */; };
+		6B7A185317A8F33C000F51F3 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7A185217A8F33C000F51F3 /* FeedItem.m */; };
 		6B824C6F174E1B2D00CA435D /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B824C6E174E1B2D00CA435D /* Feed.m */; };
 		6B9F4EE01769D27B007DABD9 /* CategoriesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9F4EDF1769D27B007DABD9 /* CategoriesListTableViewController.m */; };
 		6B9F4EE61769E734007DABD9 /* FeedListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9F4EE51769E734007DABD9 /* FeedListTableViewController.m */; };
@@ -31,8 +32,9 @@
 		6BC01707174AE097005071F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC016DF174AE096005071F1 /* Foundation.framework */; };
 		6BC0170F174AE097005071F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0170D174AE097005071F1 /* InfoPlist.strings */; };
 		6BC01712174AE097005071F1 /* RSSreaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC01711174AE097005071F1 /* RSSreaderTests.m */; };
-		6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1419D1789B80A005D6707 /* UserSavedData.m */; };
+		6BC1419E1789B80A005D6707 /* UserSavedItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1419D1789B80A005D6707 /* UserSavedItems.m */; };
 		6BC141FE17A26F8F005D6707 /* ColorStripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC141FD17A26F8D005D6707 /* ColorStripTableViewCell.m */; };
+		6BC1420217A555A1005D6707 /* UserFollowedFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC1420117A555A1005D6707 /* UserFollowedFeeds.m */; };
 		6BC354C01784483A00780036 /* purpleCicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6BC354BF1784483A00780036 /* purpleCicon.png */; };
 		6BC354C217844BDC00780036 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC354C117844BDC00780036 /* MessageUI.framework */; };
 		6BC354CA1786ECFE00780036 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC354C51786ECFE00780036 /* TFHpple.m */; };
@@ -44,7 +46,7 @@
 		6BC354E61787368F00780036 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC354E21787368A00780036 /* NSString+HTML.m */; };
 		6BC6E1B5176CBE4A00471AEA /* CityWithCategorys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6E1B4176CBE4900471AEA /* CityWithCategorys.m */; };
 		6BC6E1B8176CBE5C00471AEA /* RegionWithCitys.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6E1B7176CBE5C00471AEA /* RegionWithCitys.m */; };
-		6BC6E1BB176CBE6D00471AEA /* CountryWithRegions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6E1BA176CBE6D00471AEA /* CountryWithRegions.m */; };
+		6BC6E1BB176CBE6D00471AEA /* ContinentWithRegions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6E1BA176CBE6D00471AEA /* ContinentWithRegions.m */; };
 		6BC6E1C4176D545C00471AEA /* CategoryWithFeedsTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BC6E1C3176D545B00471AEA /* CategoryWithFeedsTemplate.m */; };
 		6BD98CD8176F80AE00EB61E8 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD98CD7176F80AE00EB61E8 /* City.m */; };
 		6BD98CDD1775ADDE00EB61E8 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD98CDA1775ADDD00EB61E8 /* FMDatabase.m */; };
@@ -53,7 +55,6 @@
 		6BD98CE01775ADDE00EB61E8 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD98CDC1775ADDE00EB61E8 /* FMResultSet.m */; };
 		6BD98CE41775AE3500EB61E8 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD98CE31775AE3500EB61E8 /* FMDatabasePool.m */; };
 		6BD98CE61775B2A400EB61E8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BD98CE51775B2A400EB61E8 /* libsqlite3.dylib */; };
-		6BE40A86176C09090020BBAD /* FollowedFeeds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE40A85176C09090020BBAD /* FollowedFeeds.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		6B1A1924175A4E6D006BC0D8 /* NSString+HTMLFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTMLFunctions.m"; sourceTree = "<group>"; };
 		6B4116FE176B01550001AD09 /* FollowedFeedsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowedFeedsTableViewController.h; sourceTree = "<group>"; };
 		6B4116FF176B01550001AD09 /* FollowedFeedsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowedFeedsTableViewController.m; sourceTree = "<group>"; };
+		6B7A185117A8F33C000F51F3 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
+		6B7A185217A8F33C000F51F3 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		6B824C6D174E1B2D00CA435D /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		6B824C6E174E1B2D00CA435D /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 		6B9F4EDE1769D27B007DABD9 /* CategoriesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesListTableViewController.h; sourceTree = "<group>"; };
@@ -105,10 +108,12 @@
 		6BC0170E174AE097005071F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6BC01710174AE097005071F1 /* RSSreaderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSreaderTests.h; sourceTree = "<group>"; };
 		6BC01711174AE097005071F1 /* RSSreaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSreaderTests.m; sourceTree = "<group>"; };
-		6BC1419C1789B80A005D6707 /* UserSavedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSavedData.h; sourceTree = "<group>"; };
-		6BC1419D1789B80A005D6707 /* UserSavedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSavedData.m; sourceTree = "<group>"; };
+		6BC1419C1789B80A005D6707 /* UserSavedItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSavedItems.h; sourceTree = "<group>"; };
+		6BC1419D1789B80A005D6707 /* UserSavedItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSavedItems.m; sourceTree = "<group>"; };
 		6BC141FC17A26F8C005D6707 /* ColorStripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorStripTableViewCell.h; sourceTree = "<group>"; };
 		6BC141FD17A26F8D005D6707 /* ColorStripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorStripTableViewCell.m; sourceTree = "<group>"; };
+		6BC1420017A555A1005D6707 /* UserFollowedFeeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFollowedFeeds.h; sourceTree = "<group>"; };
+		6BC1420117A555A1005D6707 /* UserFollowedFeeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFollowedFeeds.m; sourceTree = "<group>"; };
 		6BC354BF1784483A00780036 /* purpleCicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = purpleCicon.png; path = ../purpleCicon.png; sourceTree = "<group>"; };
 		6BC354C117844BDC00780036 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6BC354C41786ECFE00780036 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
@@ -125,8 +130,8 @@
 		6BC6E1B4176CBE4900471AEA /* CityWithCategorys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityWithCategorys.m; sourceTree = "<group>"; };
 		6BC6E1B6176CBE5C00471AEA /* RegionWithCitys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionWithCitys.h; sourceTree = "<group>"; };
 		6BC6E1B7176CBE5C00471AEA /* RegionWithCitys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionWithCitys.m; sourceTree = "<group>"; };
-		6BC6E1B9176CBE6C00471AEA /* CountryWithRegions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryWithRegions.h; sourceTree = "<group>"; };
-		6BC6E1BA176CBE6D00471AEA /* CountryWithRegions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryWithRegions.m; sourceTree = "<group>"; };
+		6BC6E1B9176CBE6C00471AEA /* ContinentWithRegions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinentWithRegions.h; sourceTree = "<group>"; };
+		6BC6E1BA176CBE6D00471AEA /* ContinentWithRegions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinentWithRegions.m; sourceTree = "<group>"; };
 		6BC6E1C2176D545A00471AEA /* CategoryWithFeedsTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryWithFeedsTemplate.h; sourceTree = "<group>"; };
 		6BC6E1C3176D545B00471AEA /* CategoryWithFeedsTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryWithFeedsTemplate.m; sourceTree = "<group>"; };
 		6BD98CD6176F80AD00EB61E8 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
@@ -138,8 +143,6 @@
 		6BD98CE21775AE3500EB61E8 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		6BD98CE31775AE3500EB61E8 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		6BD98CE51775B2A400EB61E8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		6BE40A84176C09090020BBAD /* FollowedFeeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowedFeeds.h; sourceTree = "<group>"; };
-		6BE40A85176C09090020BBAD /* FollowedFeeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowedFeeds.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,8 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				6BC354BE1781D51E00780036 /* User Data */,
-				6BC354BD1781C69E00780036 /* Locations */,
-				6BC6E1BC176CC11F00471AEA /* Feeds and Categories */,
+				6BC141FF17A5544D005D6707 /* CraigsList */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -319,11 +321,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6BC141FF17A5544D005D6707 /* CraigsList */ = {
+			isa = PBXGroup;
+			children = (
+				6BC354BD1781C69E00780036 /* Locations */,
+				6BC6E1BC176CC11F00471AEA /* Feeds and Categories */,
+			);
+			name = CraigsList;
+			sourceTree = "<group>";
+		};
 		6BC354BD1781C69E00780036 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
-				6BC6E1B9176CBE6C00471AEA /* CountryWithRegions.h */,
-				6BC6E1BA176CBE6D00471AEA /* CountryWithRegions.m */,
+				6BC6E1B9176CBE6C00471AEA /* ContinentWithRegions.h */,
+				6BC6E1BA176CBE6D00471AEA /* ContinentWithRegions.m */,
 				6BC6E1B6176CBE5C00471AEA /* RegionWithCitys.h */,
 				6BC6E1B7176CBE5C00471AEA /* RegionWithCitys.m */,
 				6BC6E1B3176CBE4900471AEA /* CityWithCategorys.h */,
@@ -337,10 +348,10 @@
 		6BC354BE1781D51E00780036 /* User Data */ = {
 			isa = PBXGroup;
 			children = (
-				6BE40A84176C09090020BBAD /* FollowedFeeds.h */,
-				6BE40A85176C09090020BBAD /* FollowedFeeds.m */,
-				6BC1419C1789B80A005D6707 /* UserSavedData.h */,
-				6BC1419D1789B80A005D6707 /* UserSavedData.m */,
+				6BC1420017A555A1005D6707 /* UserFollowedFeeds.h */,
+				6BC1420117A555A1005D6707 /* UserFollowedFeeds.m */,
+				6BC1419C1789B80A005D6707 /* UserSavedItems.h */,
+				6BC1419D1789B80A005D6707 /* UserSavedItems.m */,
 			);
 			name = "User Data";
 			sourceTree = "<group>";
@@ -382,6 +393,8 @@
 		6BC6E1BC176CC11F00471AEA /* Feeds and Categories */ = {
 			isa = PBXGroup;
 			children = (
+				6B7A185117A8F33C000F51F3 /* FeedItem.h */,
+				6B7A185217A8F33C000F51F3 /* FeedItem.m */,
 				6B824C6D174E1B2D00CA435D /* Feed.h */,
 				6B824C6E174E1B2D00CA435D /* Feed.m */,
 				6B1A18711755FFEF006BC0D8 /* Feeds.h */,
@@ -530,18 +543,19 @@
 				6B9F4EE01769D27B007DABD9 /* CategoriesListTableViewController.m in Sources */,
 				6B9F4EE61769E734007DABD9 /* FeedListTableViewController.m in Sources */,
 				6B411700176B01550001AD09 /* FollowedFeedsTableViewController.m in Sources */,
-				6BE40A86176C09090020BBAD /* FollowedFeeds.m in Sources */,
 				6BC6E1B5176CBE4A00471AEA /* CityWithCategorys.m in Sources */,
 				6BC6E1B8176CBE5C00471AEA /* RegionWithCitys.m in Sources */,
-				6BC6E1BB176CBE6D00471AEA /* CountryWithRegions.m in Sources */,
+				6BC6E1BB176CBE6D00471AEA /* ContinentWithRegions.m in Sources */,
 				6BC6E1C4176D545C00471AEA /* CategoryWithFeedsTemplate.m in Sources */,
 				6BD98CD8176F80AE00EB61E8 /* City.m in Sources */,
 				6BD98CDD1775ADDE00EB61E8 /* FMDatabase.m in Sources */,
 				6BD98CDF1775ADDE00EB61E8 /* FMResultSet.m in Sources */,
 				6BC354E31787368F00780036 /* GTMNSString+HTML.m in Sources */,
 				6BC354E51787368F00780036 /* NSString+HTML.m in Sources */,
-				6BC1419E1789B80A005D6707 /* UserSavedData.m in Sources */,
+				6BC1419E1789B80A005D6707 /* UserSavedItems.m in Sources */,
 				6BC141FE17A26F8F005D6707 /* ColorStripTableViewCell.m in Sources */,
+				6BC1420217A555A1005D6707 /* UserFollowedFeeds.m in Sources */,
+				6B7A185317A8F33C000F51F3 /* FeedItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

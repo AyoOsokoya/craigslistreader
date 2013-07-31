@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UIView *cellTypeColorIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *feedItemTitle;
 @property (weak, nonatomic) IBOutlet UILabel *itemSummary;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 - (void)setCellTypeColorIndicatorColor:(UIColor *)color;

@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSMutableString *temporaryPostTitle;
 @property (nonatomic, strong) NSMutableString *temporaryLink;
 @property (nonatomic, strong) NSMutableString *temporaryDescription;
-@property (nonatomic, strong) NSMutableString *temporaryPubdate;
+@property (nonatomic, strong) NSMutableString *temporaryDateString;
+@property (nonatomic, strong) NSDate *temporaryDateObject;
 @property (nonatomic, strong) NSMutableString *temporaryEnclosure;
 @property (nonatomic, strong) NSMutableString *temporaryGuid;
 @property (nonatomic, strong) NSString *parentElement;
@@ -33,6 +34,11 @@
     return _title;
 }
 
+- (NSMutableString *) temporaryDateString{
+    if(!_temporaryDateString) _temporaryDateString = [[NSMutableString alloc] init];
+    return _temporaryDateString;
+}
+
 - (void) setIsFollowed:(BOOL)isFollowed{
     if (isFollowed) {
        //If the feed is followed, enable the parser and parse it
@@ -47,7 +53,7 @@
         self.temporaryPostTitle = nil;
         self.temporaryLink = nil;
         self.temporaryDescription = nil;
-        self.temporaryPubdate = nil;
+        self.temporaryDateString = nil;
         self.temporaryEnclosure = nil;
         self.temporaryGuid = nil;
         self.parentElement = nil;
@@ -57,6 +63,16 @@
 - (Feed *) initWithURL:(NSString *)feedURL isFollowed:(BOOL)isFollowed{
     self = [self initWithURL:feedURL withTitle:nil isFollowed:isFollowed];
     return self;
+}
+- (Feed *)initWithURL:(NSString *)feedURL withTitle:(NSString *)title categoryTitle:(NSString *)categoryTitle isFollowed:(BOOL)isFollowed{
+    if(self = [super init]) {
+        self.link = [feedURL copy];
+        self.title = [title mutableCopy];//this ought to replace the assigned title from the feed with the new title
+        self.isFollowed = isFollowed;
+        self.categoryTitle = [categoryTitle mutableCopy];
+    }
+    return self;
+    
 }
 
 - (Feed *) initWithURL:(NSString *)feedURL withTitle:(NSString *)title isFollowed:(BOOL)isFollowed{//designated initializer
@@ -99,7 +115,7 @@
         self.temporaryPostTitle   = [[NSMutableString alloc] init];
         self.temporaryLink    = [[NSMutableString alloc] init];
         self.temporaryDescription = [[NSMutableString alloc] init];
-        self.temporaryPubdate = [[NSMutableString alloc] init];
+        self.temporaryDateString = [[NSMutableString alloc] init];
         self.temporaryGuid = [[NSMutableString alloc] init];
         self.temporaryEnclosure = [[NSMutableString alloc] init];
     }
@@ -134,8 +150,33 @@
             [self.temporaryGuid appendString:string];
         } else if ([self.element isEqualToString:@"description"]) {
             //[self.temporaryDescription appendString:string];
-        } else if ([self.element isEqualToString:@"pubDate"]) {
-            [self.temporaryPubdate appendString:string];
+        } else if ([self.element isEqualToString:@"dc:date"]) {
+            [self.temporaryDateString appendString:string];
+            //process the string
+            //2013-07-10T17:04:44+09:00
+            //init with the publication date
+            NSMutableString *dateString = self.temporaryDateString;
+            [dateString replaceOccurrencesOfString:@"-" withString:@"|" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [dateString length])];
+            [dateString replaceOccurrencesOfString:@"+" withString:@"|" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [dateString length])];
+            [dateString replaceOccurrencesOfString:@":" withString:@"|" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [dateString length])];
+            [dateString replaceOccurrencesOfString:@"T" withString:@"|" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [dateString length])];
+            
+            NSArray *timeBits = [[dateString componentsSeparatedByString:@"|"] mutableCopy];
+            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+            
+            //2013-07-10T17:04:44+09:00
+            //TODO re implement this using NSDateFormatter
+            //http://stackoverflow.com/questions/11165284/nsdateformatter-ios-date-pattern
+            [dateComponents setYear:[timeBits[0] intValue]];
+            [dateComponents setMonth:[timeBits[1] intValue]];
+            [dateComponents setDay:[timeBits[2] intValue]];
+            [dateComponents setHour:[timeBits[3] intValue]];
+            [dateComponents setMinute:[timeBits[4] intValue]];
+            [dateComponents setSecond:[timeBits[5] intValue]];
+            
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            self.temporaryDateObject = [gregorian dateFromComponents:dateComponents];
+            //
         } else if ([self.element isEqualToString:@"enclosure"]) {
             [self.temporaryEnclosure appendString:string];
         }
@@ -143,7 +184,6 @@
         if ([self.element isEqualToString:@"title"]) {
             if (![self.title length]) {
                 [self.title appendString:string];//prevent overwriting of the feed title if one is set manually
-                //NSLog(@"Appended Title %@", self.title);
             }
         }
     }
@@ -155,7 +195,7 @@
         [self.temporaryItem setObject:self.temporaryPostTitle forKey:@"title"];
         [self.temporaryItem setObject:self.temporaryLink forKey:@"link"];
         [self.temporaryItem setObject:self.temporaryDescription forKey:@"description"];
-        [self.temporaryItem setObject:self.temporaryPubdate forKey:@"pubdate"];
+        [self.temporaryItem setObject:self.temporaryDateObject forKey:@"date"];
         [self.temporaryItem setObject:self.link forKey:@"itemFeed"];
         [self.items addObject:[self.temporaryItem copy]];
     }

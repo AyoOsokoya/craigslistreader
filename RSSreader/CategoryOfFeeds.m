@@ -22,7 +22,7 @@
         [tempCategory addObject:[[Feed alloc]initWithURL:[feedTemplate objectForKey:@"feedURL"] withTitle:[feedTemplate objectForKey:@"title"] isFollowed:YES]];
     }
 
-    self.allFeeds = tempCategory;
+    self.feeds = tempCategory;
     return self;
 }
 

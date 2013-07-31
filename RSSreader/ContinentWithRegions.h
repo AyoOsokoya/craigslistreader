@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 //#import <CoreLocation/CoreLocation.h>
-@interface CountryWithRegions : NSObject
+@interface ContinentWithRegions : NSObject
 //a collection of regions
 @property (nonatomic, strong) NSString *title;
 
