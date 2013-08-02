@@ -39,7 +39,7 @@
     
     if([categoryName isEqualToString:@"Community"]) {
         color = [UIColor colorWithHue:0.1 saturation:0.5 brightness:1 alpha:1];
-    } else if([categoryName isEqualToString:@"Peronsals"]){
+    } else if([categoryName isEqualToString:@"Personals"]){
         color = [UIColor colorWithHue:0.2 saturation:0.5 brightness:1 alpha:1];
     } else if([categoryName isEqualToString:@"Services"]){
         color = [UIColor colorWithHue:0.3 saturation:0.5 brightness:1 alpha:1];

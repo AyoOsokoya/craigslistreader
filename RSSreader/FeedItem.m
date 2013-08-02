@@ -7,6 +7,8 @@
 //
 
 #import "FeedItem.h"
+#import "Feed.h"
+
 @interface FeedItem()
 @property (nonatomic, strong) NSMutableDictionary *dataStore;
 @end

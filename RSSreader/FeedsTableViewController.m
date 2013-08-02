@@ -7,6 +7,7 @@
 //
 
 #import "FeedsTableViewController.h"
+#import "FeedItem.h"
 
 @interface FeedsTableViewController ()
 @property (nonatomic, strong) UserFollowedFeeds *feeds;
@@ -41,8 +42,36 @@
 }
 
 - (IBAction)refreshButtonPressed:(id)sender {
+    
+    /*dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                       [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                        //Todo ask the city to init the feed with the correct feed domain
+                        //could I store all of this as json or something then just load it up
+                        self.feeds = [[CategoryOfFeeds alloc] initWithTitle:@"Jobs" feedDomain:@"craigslist.jp" forCity:@"Tokyo"];
+                        //[self.feeds [[CategoryOfFeeds alloc] initWithTitle:@"Housing" feedDomain:@"craigslist.jp" forCity:@"Tokyo"];
+        
+                       dispatch_async(dispatch_get_main_queue(), ^ {
+                           [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                           [self.tableView reloadData];
+                       });
+                   });
+     */
+    dispatch_async(dispatch_get_global_queue(0, 0), ^ {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    });
+    
+    //http://stackoverflow.com/questions/6246003/setnetworkactivityindicatorvisible-spinner-not-displaying
+    //TODO Network Activity not being updated has something do to with threads
+    NSLog(@"Refreshing Start");
+    self.userData.items = nil;
+    //reload data seems to be ignored till we return to main function
+    [self.tableView reloadData];
+    
+    
     [self.userData refreshFeeds];
     [self.tableView reloadData];
+    NSLog(@"Refreshing Finish");
+    //[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 
@@ -51,6 +80,13 @@
     [super viewDidLoad];
     
     self.userData = [[UserFollowedFeeds alloc] init];
+    //UIColor *navigationColor = [UIColor colorWithHue:240/360.0f saturation:0.0f brightness:0.8f alpha:1];
+    
+    UIColor *navigationColor = [UIColor colorWithHue:240/360.0f saturation:0.0f brightness:0.6f alpha:1];
+    //Nice Blurple
+    //UIColor *navigationColor = [UIColor colorWithHue:240/360.0f saturation:0.4f brightness:0.8f alpha:1];
+    [self.navigationController.navigationBar setTintColor:navigationColor];
+    [self.navigationController.toolbar setTintColor:navigationColor];
     
     [self.tableView reloadData];
     
@@ -74,16 +110,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     //count the number of feeds
-    return [self.userData.feeds count];
+    //return [self.userData.feeds count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //introspection not necessary but good practice
-    if ([self.userData.feeds[section] isKindOfClass:[Feed class]]) {
-        Feed * feed = (Feed *) self.userData.feeds[section];
-        return [feed.items count];
-    } else return 0;
+    //if ([self.userData.feeds[section] isKindOfClass:[Feed class]]) {
+        //Feed * feed = (Feed *) self.userData.feeds[section];
+        //return [feed.items count];
+    //} else return 0;
+    return [self.userData.items count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
@@ -102,21 +140,24 @@
     static NSString *cellIdentifier = @"CellTypeColorIndicator";
     ColorStripTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    Feed *feed = self.userData.feeds[indexPath.section];
-    NSDictionary *currentItem = feed.items[indexPath.row];
+    FeedItem *currentItem = self.userData.items[indexPath.row];
     //currentItem.
     
-    NSString *itemTitle = [currentItem objectForKey: @"title"];
+    NSString *itemTitle = currentItem.title;
     cell.feedItemTitle.text = [NSString stringWithFormat:@"%@", itemTitle];
     
     
-    NSString *description = [[currentItem objectForKey:@"description"] stringByReplacingOccurrencesOfString:@" 00:00:00 +0000" withString:@""];
+    NSString *description = [currentItem.description stringByReplacingOccurrencesOfString:@" 00:00:00 +0000" withString:@""];
     cell.itemSummary.text = [NSString stringWithFormat:@"%@", description];
     
     cell.locationLabel.text = @"Somewhere in Japan";
-    cell.dateLabel.text = @"Yesterday";
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@", currentItem.date];
     
-    [cell setCellTypeColorIndicatorByCategoryName:feed.categoryTitle];
+    //NSMutableString *category = [currentItem objectForKey:@"category"];
+    
+    [cell setCellTypeColorIndicatorByCategoryName:currentItem.categoryTitle];
+    currentItem.wasViewed = YES;
+    
     [cell.itemSummary setHidden:YES];
     
     return cell;
@@ -147,11 +188,11 @@
     if ([[segue identifier] isEqualToString:@"ShowDetailSegue"]){
         
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSMutableDictionary * currentItem = [[self.userData.feeds[indexPath.section] items] objectAtIndex:indexPath.row];
+        FeedItem * currentItem = self.userData.items[indexPath.row];
         
-        [segue.destinationViewController setItemURL:[currentItem objectForKey:@"link"]];
+        [segue.destinationViewController setItemURL:currentItem.link];
         //[segue.destinationViewController setPageHTML:[currentItem objectForKey:@"description"]];
-        [segue.destinationViewController setTitle:[currentItem objectForKey:@"title"]];
+        [segue.destinationViewController setTitle:currentItem.title];
     }
 }
 

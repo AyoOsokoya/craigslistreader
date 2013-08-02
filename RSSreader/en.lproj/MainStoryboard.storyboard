@@ -85,6 +85,36 @@
             </objects>
             <point key="canvasLocation" x="340" y="-603"/>
         </scene>
+        <!--Table View Controller - Liked Posts-->
+        <scene sceneID="Izg-oK-irJ">
+            <objects>
+                <tableViewController id="Bfs-TX-ihn" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QQe-eL-DZl">
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wSO-Ow-Ycv">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Bfs-TX-ihn" id="gwq-BE-Dbh"/>
+                            <outlet property="delegate" destination="Bfs-TX-ihn" id="kW6-vO-ikW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Liked Posts" id="0YZ-dx-x8O"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OaB-bN-Csw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-177" y="794"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="9qp-lv-LIV">
             <objects>
@@ -159,7 +189,7 @@
             </objects>
             <point key="canvasLocation" x="753" y="835"/>
         </scene>
-        <!--Feeds Table View Controller - Feed Name-->
+        <!--Feeds Table View Controller - Craigstream-->
         <scene sceneID="Qec-kE-7AM">
             <objects>
                 <tableViewController id="I1z-9R-lcQ" customClass="FeedsTableViewController" sceneMemberID="viewController">
@@ -216,19 +246,19 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="qOx-JQ-X5Z" secondAttribute="bottom" constant="1" id="0xV-ag-3iO"/>
                                     <constraint firstItem="qbs-y2-qnr" firstAttribute="top" secondItem="LLs-iE-hDf" secondAttribute="top" type="default" id="5F7-5w-dsV"/>
                                     <constraint firstItem="sTU-34-mYc" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="20" type="default" id="6cy-lg-rvJ"/>
+                                    <constraint firstItem="qOx-JQ-X5Z" firstAttribute="centerY" secondItem="meS-NT-g9o" secondAttribute="centerY" type="default" id="Bep-Jy-kNb"/>
                                     <constraint firstItem="LLs-iE-hDf" firstAttribute="trailing" secondItem="Zjn-Wn-LqW" secondAttribute="trailing" type="default" id="EsU-eh-OeU"/>
                                     <constraint firstItem="qOx-JQ-X5Z" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" type="default" id="GII-vE-sHl"/>
                                     <constraint firstAttribute="bottom" secondItem="qbs-y2-qnr" secondAttribute="bottom" constant="6" id="IDV-cE-qDx"/>
                                     <constraint firstItem="sTU-34-mYc" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" constant="46" id="Idg-2Z-CAR"/>
                                     <constraint firstItem="qbs-y2-qnr" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="20" type="default" id="Mwz-ug-aFK"/>
+                                    <constraint firstItem="qOx-JQ-X5Z" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" type="default" id="bvp-Wk-RSF"/>
                                     <constraint firstItem="LLs-iE-hDf" firstAttribute="baseline" secondItem="qbs-y2-qnr" secondAttribute="baseline" type="default" id="epm-tT-cSq"/>
                                     <constraint firstItem="Zjn-Wn-LqW" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" constant="-3" id="lu5-6h-f4o"/>
                                     <constraint firstItem="Zjn-Wn-LqW" firstAttribute="leading" secondItem="qOx-JQ-X5Z" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ofc-AR-OJI"/>
                                     <constraint firstItem="Zjn-Wn-LqW" firstAttribute="leading" secondItem="meS-NT-g9o" secondAttribute="leading" constant="17" id="p3d-R6-MSb"/>
-                                    <constraint firstItem="qOx-JQ-X5Z" firstAttribute="top" secondItem="meS-NT-g9o" secondAttribute="top" type="default" id="tfC-4P-0TO"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="cellTypeColorIndicator" destination="qOx-JQ-X5Z" id="0Hz-6j-uqG"/>
@@ -252,9 +282,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xy8-sc-cEm"/>
-                        <barButtonItem title="Item" id="h96-xu-mXt"/>
+                        <barButtonItem title="Feeds" id="h96-xu-mXt"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="tx3-Ta-LEF"/>
-                        <barButtonItem title="OutBox" id="lbM-B4-jjE"/>
+                        <barButtonItem title="Liked" id="lbM-B4-jjE">
+                            <connections>
+                                <segue destination="Bfs-TX-ihn" kind="push" id="Tad-1X-0pk"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="dIr-fw-Fa9"/>
                         <barButtonItem title="Refresh" id="XBV-Sd-IUQ">
                             <connections>
@@ -262,7 +296,7 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Feed Name" id="w6k-qZ-BZe">
+                    <navigationItem key="navigationItem" title="Craigstream" id="w6k-qZ-BZe">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="1L6-ob-7ab">
                             <connections>
                                 <action selector="toggleEditMode:" destination="I1z-9R-lcQ" id="i70-Nh-N4x"/>
@@ -390,6 +424,9 @@
         <class className="APPDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/APPDetailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="exportItem:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="replyToItem:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="toggleBookMarkItem:" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="exportButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="replyButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="saveButton" candidateClass="UIBarButtonItem"/>

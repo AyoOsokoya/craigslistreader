@@ -9,6 +9,7 @@
 #import "Feed.h"
 #import "NSString+HTML.h"
 #import "GTMNSString+HTML.h"
+#import "FeedItem.h"
 
 @interface Feed()
 @property (nonatomic, strong) NSMutableDictionary *temporaryItem;
@@ -46,31 +47,27 @@
         _isFollowed = YES;
         [self.parser setDelegate:self];
         [self.parser setShouldResolveExternalEntities:NO];
-        [self.parser parse];
     } else {
         _isFollowed = NO;
         self.parser = nil;
-        self.temporaryPostTitle = nil;
-        self.temporaryLink = nil;
-        self.temporaryDescription = nil;
-        self.temporaryDateString = nil;
-        self.temporaryEnclosure = nil;
-        self.temporaryGuid = nil;
-        self.parentElement = nil;
     }
 }
 
 - (Feed *) initWithURL:(NSString *)feedURL isFollowed:(BOOL)isFollowed{
     self = [self initWithURL:feedURL withTitle:nil isFollowed:isFollowed];
+    
+    if (isFollowed) [self.parser parse];
     return self;
 }
 - (Feed *)initWithURL:(NSString *)feedURL withTitle:(NSString *)title categoryTitle:(NSString *)categoryTitle isFollowed:(BOOL)isFollowed{
     if(self = [super init]) {
         self.link = [feedURL copy];
         self.title = [title mutableCopy];//this ought to replace the assigned title from the feed with the new title
-        self.isFollowed = isFollowed;
         self.categoryTitle = [categoryTitle mutableCopy];
+        self.isFollowed = isFollowed; //this is set lasts as it call parse
     }
+    
+    if (isFollowed) [self.parser parse];
     return self;
     
 }
@@ -81,9 +78,13 @@
         self.title = [title mutableCopy];//this ought to replace the assigned title from the feed with the new title
         self.isFollowed = isFollowed;
     }
+    
+    if (isFollowed) [self.parser parse];
     return self;
 }
+
 - (void) refresh {
+    self.items = nil;
     [self.parser parse];
     //we could use NSNotification Center to update the view once this is done
 }
@@ -191,13 +192,15 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
-        [self.temporaryItem setObject:self.title forKey:@"feedTitle"];
-        [self.temporaryItem setObject:self.temporaryPostTitle forKey:@"title"];
-        [self.temporaryItem setObject:self.temporaryLink forKey:@"link"];
-        [self.temporaryItem setObject:self.temporaryDescription forKey:@"description"];
-        [self.temporaryItem setObject:self.temporaryDateObject forKey:@"date"];
-        [self.temporaryItem setObject:self.link forKey:@"itemFeed"];
-        [self.items addObject:[self.temporaryItem copy]];
+        FeedItem *newItem = [[FeedItem alloc]init];
+        newItem.title = self.temporaryPostTitle;
+        newItem.feedTitle = self.title;
+        newItem.link = self.temporaryLink;
+        newItem.description = self.temporaryDescription;
+        newItem.date = self.temporaryDateObject;
+        newItem.categoryTitle = self.categoryTitle;
+        //was viewed will come from the database
+        newItem.wasViewed = NO;
     }
 }
 

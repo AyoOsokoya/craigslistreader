@@ -7,6 +7,7 @@
 //
 
 #import "UserFollowedFeeds.h"
+#import "FeedItem.h"
 
 @implementation UserFollowedFeeds
 
@@ -16,9 +17,7 @@
     
 }
 
-//A Temporary InitMethod
-- (UserFollowedFeeds *) init{
-    self = [super init];
+- (void)initiateWithTemporaryFeeds{
     Feed *feed = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/search/med?query=%20&format=rss" withTitle:nil categoryTitle:@"Jobs" isFollowed:YES];
     Feed *feed1 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/search/eng?query=%20&format=rss" withTitle:nil categoryTitle:@"Jobs" isFollowed:YES];
     Feed *feed2 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/edu/index.rss" withTitle:nil categoryTitle:@"Jobs" isFollowed:YES];
@@ -27,9 +26,10 @@
     Feed *feed5 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/search/tch?query=%20&format=rss" withTitle:nil categoryTitle:@"Jobs" isFollowed:YES];
     Feed *feed6 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/search/web?query=%20&format=rss" withTitle:nil categoryTitle:@"Jobs" isFollowed:YES];
     Feed *feed7 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/apa/index.rss" withTitle:nil categoryTitle:@"Housing" isFollowed:YES];
-    [self.feeds  addObjectsFromArray:@[feed, feed1, feed2, feed3, feed4, feed5, feed6, feed7]];
+    Feed *feed8 = [[Feed alloc] initWithURL:@"http://tokyo.craigslist.jp/search/w4m?query=%20&format=rss" withTitle:nil categoryTitle:@"Personals" isFollowed:YES];
+    [self.feeds  addObjectsFromArray:@[feed, feed1, feed2, feed3, feed4, feed5, feed6, feed7, feed8]];
     
-    self.items = [self sortItemsIn:self.items By:@"date"];
+    //self.items = [self sortItemsIn:self.items By:@"date"];
     //if item is viewed and date is less than a particular time.... cull it
     
     //Copy all of the items to a single array
@@ -39,27 +39,17 @@
     
     NSLog(@"%d", [self.items count]);
     
-    for (Feed *feed in self.feeds) {
-        feed.items = [self cullItems:feed.items ByNSDate:nil];
-    }
-    
-    self.items = nil;
-    
-    for (Feed *feed in self.feeds){
-        [self.items addObjectsFromArray:feed.items];
-    }
-    //dump this into a Method
-    /*NSMutableIndexSet *itemsForRemoval = [[NSMutableIndexSet alloc] init];
-    for (NSInteger i = 0; i < [self.items count]; i++ ) {
-        NSDate *itemDate = [self.items[i] objectForKey:@"date"];
-        ///NSLog(@"%f", [[item objectForKey:@"date"] timeIntervalSinceNow]);
-        if ([itemDate timeIntervalSinceNow] < -48*60*60) {
-            [itemsForRemoval addIndex:i];
-        }
-    }*/
-    
+    self.items = [self cullItems:self.items ByNSDate:nil];
+    self.items = [self sortItemsIn:self.items By:@"date"];
     
     NSLog(@"%d", [self.items count]);
+    
+}
+
+//A Temporary InitMethod
+- (UserFollowedFeeds *) init{
+    self = [super init];
+    [self initiateWithTemporaryFeeds];
     
     return self;
 }
@@ -72,8 +62,7 @@
     NSMutableIndexSet *itemsForRemoval = [[NSMutableIndexSet alloc] init];
     
     for (NSInteger i = 0; i < [items count]; i++ ) {
-        NSDate *itemDate = [items[i] objectForKey:@"date"];
-        ///NSLog(@"%f", [[item objectForKey:@"date"] timeIntervalSinceNow]);
+        NSDate *itemDate = [items[i] date];
         if ([itemDate timeIntervalSinceNow] < -48*60*60) {
             [itemsForRemoval addIndex:i];
         }
@@ -83,11 +72,19 @@
 }
 #pragma mark - Feed Array Methods
 - (void)refreshFeeds{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     //TODO This might be faster asynchronously
-    for (Feed *feed in self.feeds) {
-        [self refreshFeed:feed];
-    }
-    [self updateAllFeeds];
+    self.items = nil;
+    self.feeds = nil;
+    [self initiateWithTemporaryFeeds];
+    
+    //for (Feed *feed in self.feeds){
+        //feed.items = nil;
+        //[self refreshFeed:feed];
+        //[self.items addObjectsFromArray:feed.items];
+    //}
+    //[self updateAllFeeds];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void)refreshFeed:(Feed *)feed{
@@ -149,26 +146,28 @@
      */
     NSMutableArray *sortedItems = [sortingArray mutableCopy];
     
-    if([sortingType isEqualToString:@"ByDate"]) {
-        [sortedItems sortUsingComparator:(NSComparator)^(NSMutableDictionary *item1, NSMutableDictionary *item2) {
-            return [[item1 objectForKey:@"date"] compare:[item2 objectForKey:@"date"]];
+    if([sortingType isEqualToString:@"date"]) {
+        [sortedItems sortUsingComparator:(NSComparator)^(FeedItem *item1, FeedItem *item2) {
+            return [item1.date compare:item2.date];
         }];
         
-    } else if([sortingType isEqualToString:@"ByType"]){
-        [sortedItems sortUsingComparator:(NSComparator)^(NSMutableDictionary *item1, NSMutableDictionary *item2) {
-            return [[item1 objectForKey:@"title"] caseInsensitiveCompare:[item2 objectForKey:@"title"]];
+    } else if([sortingType isEqualToString:@"type"]){
+        [sortedItems sortUsingComparator:(NSComparator)^(FeedItem *item1, FeedItem *item2) {
+            #warning - not implemented yet!
+            return nil;
         }];
         
-    } else if([sortingType isEqualToString:@"OriginalOrder"]){
-        [sortedItems sortUsingComparator:(NSComparator)^(NSMutableDictionary *item1, NSMutableDictionary *item2) {
-            return [[item1 objectForKey:@"title"] caseInsensitiveCompare:[item2 objectForKey:@"title"]];
+    } else if([sortingType isEqualToString:@"originalOrder"]){
+        [sortedItems sortUsingComparator:(NSComparator)^(FeedItem *item1, FeedItem *item2) {
+            #warning - not implemented yet!
+            return nil;
         }];
         
-    } else if([sortingType isEqualToString:@"Title"]){
-        [sortedItems sortUsingComparator:(NSComparator)^(NSMutableDictionary *item1, NSMutableDictionary *item2) {
-            return [[item1 objectForKey:@"title"] caseInsensitiveCompare:[item2 objectForKey:@"title"]];
+    } else if([sortingType isEqualToString:@"title"]){
+        [sortedItems sortUsingComparator:(NSComparator)^(FeedItem *item1, FeedItem *item2) {
+            return [item1.title caseInsensitiveCompare:item2.title];
         }];
-    }
+    } 
     //NSSortDescriptor or NSComparator
     
     return sortedItems;
